@@ -1,0 +1,50 @@
+# action.yml
+name: 'Infisical Loader'
+author: Fritz Larco
+description: 'Load your Infisical Secrets into your Github Actions workflow'
+
+inputs:
+  version:
+    description: 'The CLI version to use (e.g. 0.28.1). Check https://github.com/Infisical/infisical/tags'
+    required: true
+  
+  client_id:
+    description: 'The client-id value, typically secrets.INFISICAL_CLIENT_ID'
+    required: true
+
+  client_secret:
+    description: 'The client-secret value, typically secrets.INFISICAL_CLIENT_SECRET'
+    required: true
+
+  project_id:
+    description: 'The project-id or workspace-id value'
+    required: true
+
+  path:
+    description: 'The secrets path value'
+    required: false
+    default: '/'
+
+  dotenv:
+    description: 'Create a .env file in the root folder. Accepts `true` or `false`'
+    required: false
+
+  dotenv_sh:
+    description: 'Create a .env.sh file in the root folder. Accepts `true` or `false`'
+    required: false
+    
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
+    INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
+    INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
+    INFISICAL_PATH: ${{ inputs.path }}
+    INFISICAL_VERSION: ${{ inputs.version }}
+    DOTENV: ${{ inputs.dotenv }}
+    DOTENV_SH: ${{ inputs.dotenv_sh }}
+
+branding:
+  color: black
+  icon: zap
