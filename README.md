@@ -10,5 +10,5 @@ Action to Inject Infisical Secrets in your environment
     client_secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
     project_id: ${{ secrets.INFISICAL_PROJECT_ID }}
     env: staging
-   path: /
+    path: /
 ```
