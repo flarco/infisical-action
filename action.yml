@@ -20,6 +20,10 @@ inputs:
     description: 'The project-id or workspace-id value'
     required: true
 
+  env:
+    description: the environment to use
+    required: true
+
   path:
     description: 'The secrets path value'
     required: false
@@ -40,6 +44,7 @@ runs:
     INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
     INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
     INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
+    INFISICAL_ENV: ${{ inputs.env }}
     INFISICAL_PATH: ${{ inputs.path }}
     INFISICAL_VERSION: ${{ inputs.version }}
     DOTENV: ${{ inputs.dotenv }}

@@ -3,7 +3,7 @@ set -e
 
 export INFISICAL_TOKEN=$(./infisical login --method=universal-auth --client-id=$INFISICAL_CLIENT_ID --client-secret=$INFISICAL_CLIENT_SECRET --silent --plain)
 
-./infisical export --env staging --projectId $INFISICAL_PROJECT_ID --path=$INFISICAL_PATH --format json > env.json
+./infisical export --env $INFISICAL_ENV --projectId $INFISICAL_PROJECT_ID --path=$INFISICAL_PATH --format json > env.json
 
 echo 'running infisical-load.py'
 python3 /infisical-load.py
