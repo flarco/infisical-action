@@ -3,6 +3,9 @@ import os, json
 with open('env.json') as file:
   secrets = json.load(file)
 
+# delete the env.json file
+os.remove('env.json')
+
 multiline_template = '''
 echo '{k}<<EEEE123123OOOO987987FFFFF
 {v}
