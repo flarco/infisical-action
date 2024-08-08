@@ -3,7 +3,6 @@ set -e
 
 # Set INFISICAL_PROJECT_ID from .infisical.json if it's empty
 export INFISICAL_PROJECT_ID=$(python3 /infisical-set-project-id.py)
-echo "set INFISICAL_PROJECT_ID=$INFISICAL_PROJECT_ID"
 
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
