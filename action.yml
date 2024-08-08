@@ -27,7 +27,6 @@ inputs:
   path:
     description: 'The secrets path value'
     required: false
-    default: '/'
 
   dotenv:
     description: 'Create a .env file in the root folder. Accepts `true` or `false`'

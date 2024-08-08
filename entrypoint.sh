@@ -1,8 +1,31 @@
 #!/usr/bin/env bash
 set -e
 
+
+if test -f ".infisical.json"; then
+  # get INFISICAL_PATH is emtpy or set to /
+  if [ -z "$INFISICAL_PATH" ]; then
+    export INFISICAL_PATH=$(jq -r '.secretPath // "/"' .infisical.json) 
+  fi
+  # get INFISICAL_PROJECT_ID is emtpy
+  if [ -z "$INFISICAL_PROJECT_ID" ]; then
+    export INFISICAL_PROJECT_ID=$(jq -r '.workspaceId' .infisical.json) 
+  fi
+else
+  if [ -z "$INFISICAL_PATH" ]; then
+    # set to / if empty
+    export INFISICAL_PATH='/'
+  fi
+  if [ -z "$INFISICAL_PROJECT_ID" ]; then
+    echo 'PROJECT_ID needs to be set in the workflow or in .infisical.json (with "workspaceId")'
+    exit 1
+  fi
+fi
+
 # Set INFISICAL_PROJECT_ID from .infisical.json if it's empty
 export INFISICAL_PROJECT_ID=$(python3 /infisical-set-project-id.py)
+
+export SECRET_PATH=$(jq -r '.secretPath // "/"' .infisical.json) # look for path in infisical.json, default to /
 
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
