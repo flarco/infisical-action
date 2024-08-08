@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-# download infisical cli
-export VERSION=$INFISICAL_VERSION
-cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_amd64.tar.gz" && tar -xf "infisical_${VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${VERSION}_linux_amd64.tar.gz"
-
-export INFISICAL_TOKEN=$(/infisical login --method=universal-auth --client-id=$INFISICAL_CLIENT_ID --client-secret=$INFISICAL_CLIENT_SECRET --silent --plain)
-
 # Set INFISICAL_PROJECT_ID from .infisical.json if it's empty
 export INFISICAL_PROJECT_ID=$(python3 infisical-set-project-id.py)
+
+# download infisical cli
+export VERSION=$INFISICAL_VERSION
+cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_amd64.tar.gz" && tar -xf "infisical_${VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${VERSION}_linux_amd64.tar.gz" && cd -
+
+export INFISICAL_TOKEN=$(/infisical login --method=universal-auth --client-id=$INFISICAL_CLIENT_ID --client-secret=$INFISICAL_CLIENT_SECRET --silent --plain)
 
 if [ -z "$INFISICAL_PROJECT_ID" ]; then
   if [ -z "$INFISICAL_ENV" ]; then
