@@ -22,11 +22,6 @@ else
   fi
 fi
 
-# Set INFISICAL_PROJECT_ID from .infisical.json if it's empty
-export INFISICAL_PROJECT_ID=$(python3 /infisical-set-project-id.py)
-
-export SECRET_PATH=$(jq -r '.secretPath // "/"' .infisical.json) # look for path in infisical.json, default to /
-
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
 cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_amd64.tar.gz" && tar -xf "infisical_${VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${VERSION}_linux_amd64.tar.gz" && cd -
