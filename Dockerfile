@@ -5,6 +5,6 @@ WORKDIR /
 COPY entrypoint.sh /entrypoint.sh
 COPY infisical-load.py /infisical-load.py
 
-RUN cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${INPUT_VERSION}/infisical_${INPUT_VERSION}_linux_amd64.tar.gz" && tar -xvf "infisical_${INPUT_VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${INPUT_VERSION}_linux_amd64.tar.gz"
+RUN cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv$INPUT_VERSION/infisical_$INPUT_VERSION_linux_amd64.tar.gz" && tar -xvf "infisical_$INPUT_VERSION_linux_amd64.tar.gz" && rm -f "infisical_$INPUT_VERSION_linux_amd64.tar.gz"
 
 ENTRYPOINT ["/entrypoint.sh"]
