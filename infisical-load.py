@@ -36,7 +36,10 @@ for secret in secrets:
   
 
 # replace re-used env vars
-for k, val in secrets.items():
+for secret in secrets:
+  k = secret['key']
+  val = secret['value']
+  
   key = '${' + k + '}'
   for i, _ in enumerate(bash_lines):
     bash_lines[i] = bash_lines[i].replace(key, val)
