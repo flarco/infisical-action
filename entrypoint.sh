@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
+# download jq
+wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 && mv jq-linux-amd64 jq && chmod +x jq
 
 if test -f ".infisical.json"; then
   # get INFISICAL_PATH is emtpy or set to /
   if [ -z "$INFISICAL_PATH" ]; then
-    export INFISICAL_PATH=$(jq -r '.secretPath // "/"' .infisical.json) 
+    export INFISICAL_PATH=$(./jq -r '.secretPath // "/"' .infisical.json) 
   fi
   # get INFISICAL_PROJECT_ID is emtpy
   if [ -z "$INFISICAL_PROJECT_ID" ]; then
-    export INFISICAL_PROJECT_ID=$(jq -r '.workspaceId' .infisical.json) 
+    export INFISICAL_PROJECT_ID=$(./jq -r '.workspaceId' .infisical.json) 
   fi
 else
   if [ -z "$INFISICAL_PATH" ]; then
