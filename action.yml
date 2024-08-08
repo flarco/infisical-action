@@ -40,6 +40,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.version }}
   env:
     INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
     INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
