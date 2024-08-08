@@ -17,8 +17,8 @@ Action to Inject Infisical Secrets in your environment
     required: true
 
   project_id:
-    description: 'The project-id or workspace-id value.'
-    required: true
+    description: 'The project-id or workspace-id value. If not set, will use .infisical.json'
+    required: false
 
   env:
     description: The environment to use. If not set, will use .infisical.json

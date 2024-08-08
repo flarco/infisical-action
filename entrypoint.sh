@@ -7,7 +7,9 @@ cd / && wget "https://github.com/Infisical/infisical/releases/download/infisical
 
 export INFISICAL_TOKEN=$(/infisical login --method=universal-auth --client-id=$INFISICAL_CLIENT_ID --client-secret=$INFISICAL_CLIENT_SECRET --silent --plain)
 
-# use .infisical.json if INFISICAL_PROJECT_ID or INFISICAL_ENV is not set
+# Set INFISICAL_PROJECT_ID from .infisical.json if it's empty
+export INFISICAL_PROJECT_ID=$(python3 infisical-set-project-id.py)
+
 if [ -z "$INFISICAL_PROJECT_ID" ]; then
   if [ -z "$INFISICAL_ENV" ]; then
     /infisical export --path "$INFISICAL_PATH" --format json > env.json
