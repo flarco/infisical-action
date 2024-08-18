@@ -65,5 +65,5 @@ bash secrets.sh
 echo 'loading masks.sh'
 bash masks.sh
 
-rm -f secrets.sh
-rm -f masks.sh
+Remove-Item -Path secrets.sh
+Remove-Item -Path masks.sh
