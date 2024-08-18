@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        runner: macos-latest, ubuntu-20.04, windows-latest]
+        runner: [macos-latest, ubuntu-20.04, windows-latest]
     
     steps:
       - name: Load Secrets
@@ -26,3 +26,7 @@ jobs:
           client_id: ${{ secrets.INFISICAL_CLIENT_ID }}
           client_secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
           path: /
+
+      - name: Echo
+        run: echo $ENV
+        shell: bash
