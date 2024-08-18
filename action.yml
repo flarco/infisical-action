@@ -48,6 +48,7 @@ runs:
           python-version: '3.9'
       
       - name: Load Secrets (Linux)
+        shell: bash
         env:
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
@@ -61,6 +62,7 @@ runs:
         run: bash infisical-linux.sh
 
       - name: Load Secrets (Mac)
+        shell: bash
         env:
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
@@ -74,6 +76,7 @@ runs:
         run: bash infisical-mac.sh
 
       - name: Load Secrets (Windows)
+        shell: pwsh
         env:
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
@@ -84,7 +87,6 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'windows'
-        shell: pwsh
         run: .\infisical-windows.ps1
 
 branding:
