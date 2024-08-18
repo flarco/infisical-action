@@ -44,14 +44,17 @@ Remove-Item -Path "infisical_$suffix"
 
 echo 'downloaded infisical cli'
 
-export INFISICAL_TOKEN=$(./infisical login --method=universal-auth --client-id=$INFISICAL_CLIENT_ID --client-secret=$INFISICAL_CLIENT_SECRET --silent --plain)
+# Login and get the Infisical token
+$env:INFISICAL_TOKEN = ./infisical login --method=universal-auth --client-id=$env:INFISICAL_CLIENT_ID --client-secret=$env:INFISICAL_CLIENT_SECRET --silent --plain
 
 echo 'got token'
-if [ -z "$INFISICAL_ENV" ]; then
-  ./infisical export --projectId "$INFISICAL_PROJECT_ID" --path "$INFISICAL_PATH" --format json > env.json
-else
-  ./infisical export --env "$INFISICAL_ENV" --projectId "$INFISICAL_PROJECT_ID" --path "$INFISICAL_PATH" --format json > env.json
-fi
+
+# Export environment variables based on whether INFISICAL_ENV is set
+if (-not $env:INFISICAL_ENV) {
+    ./infisical export --projectId $env:INFISICAL_PROJECT_ID --path $env:INFISICAL_PATH --format json | Out-File -FilePath "env.json"
+} else {
+    ./infisical export --env $env:INFISICAL_ENV --projectId $env:INFISICAL_PROJECT_ID --path $env:INFISICAL_PATH --format json | Out-File -FilePath "env.json"
+}
 
 echo 'running infisical-load.py'
 python3 infisical.py make_secrets
