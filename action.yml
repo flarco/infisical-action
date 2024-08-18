@@ -38,17 +38,6 @@ inputs:
     
 runs:
   using: 'composite'
-  
-  env:
-    INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
-    INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
-    INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
-    INFISICAL_ENV: ${{ inputs.env }}
-    INFISICAL_PATH: ${{ inputs.path }}
-    INFISICAL_VERSION: ${{ inputs.version }}
-    DOTENV: ${{ inputs.dotenv }}
-    DOTENV_SH: ${{ inputs.dotenv_sh }}
-  
   steps:
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -58,6 +47,15 @@ runs:
       - name: Load
         run: bash infisical-loader.sh
         shell: bash
+        env:
+          INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
+          INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
+          INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
+          INFISICAL_ENV: ${{ inputs.env }}
+          INFISICAL_PATH: ${{ inputs.path }}
+          INFISICAL_VERSION: ${{ inputs.version }}
+          DOTENV: ${{ inputs.dotenv }}
+          DOTENV_SH: ${{ inputs.dotenv_sh }}
 
 branding:
   color: black
