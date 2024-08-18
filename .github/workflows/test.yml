@@ -1,0 +1,28 @@
+name: Test Workflow
+
+on:
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 5
+
+    strategy:
+      fail-fast: true
+      matrix:
+        runner: macos-latest, ubuntu-20.04, windows-latest]
+    
+    steps:
+      - name: Load Secrets
+        uses: flarco/infisical-action@main
+        with:
+          version: 0.28.1
+          project_id: ${{ secrets.INFISICAL_PROJECT_ID }}
+          client_id: ${{ secrets.INFISICAL_CLIENT_ID }}
+          client_secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
+          path: /

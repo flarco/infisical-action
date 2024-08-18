@@ -37,8 +37,8 @@ inputs:
     required: false
     
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  
   env:
     INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
     INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
@@ -48,6 +48,16 @@ runs:
     INFISICAL_VERSION: ${{ inputs.version }}
     DOTENV: ${{ inputs.dotenv }}
     DOTENV_SH: ${{ inputs.dotenv_sh }}
+  
+  steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Load
+        run: bash infisical-loader.sh
+        shell: bash
 
 branding:
   color: black
