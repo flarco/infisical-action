@@ -37,7 +37,7 @@ $suffix = $env:VERSION + "_windows_amd64.zip"
 Invoke-WebRequest -Uri "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv$env:VERSION/infisical_$suffix" -OutFile "infisical_$suffix"
 
 # Extract the zip file
-Expand-Archive -Path "infisical_$suffix" -DestinationPath "."
+Expand-Archive -Path "infisical_$suffix" -DestinationPath "." -Force
 
 # Remove the zip file
 Remove-Item -Path "infisical_$suffix"
