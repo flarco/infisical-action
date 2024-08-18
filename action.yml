@@ -62,9 +62,7 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'linux'
-        run: |
-          cd ${{ github.action_path }}
-          bash infisical-linux.sh
+        run: bash ${{ github.action_path }}/infisical-linux.sh
 
       - name: Load Secrets (Mac)
         shell: bash
@@ -78,9 +76,7 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'macOS'
-        run: |
-          cd ${{ github.action_path }}
-          bash infisical-mac.sh
+        run: bash ${{ github.action_path }}/infisical-mac.sh
 
       - name: Load Secrets (Windows)
         shell: pwsh
@@ -94,9 +90,7 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'windows'
-        run: |
-          cd ${{ github.action_path }}
-          .\infisical-windows.ps1
+        run: ${{ github.action_path }}\infisical-windows.ps1
 
 branding:
   color: black
