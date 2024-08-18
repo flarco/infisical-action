@@ -35,6 +35,11 @@ inputs:
   dotenv_sh:
     description: 'Create a .env.sh file in the root folder. Accepts `true` or `false`'
     required: false
+
+  use_system_python:
+    description: Don't install python (use the system's python)
+    default: false
+    required: false
     
 runs:
   using: 'composite'
@@ -46,6 +51,7 @@ runs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
+        if: ${{ inputs.use_system_python != 'true' }}
         with:
           python-version: '3.9'
       
