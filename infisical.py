@@ -59,12 +59,12 @@ def make_secrets():
     if '\n' in val:
       bash_lines.append(multiline_template.replace('{k}', k).replace('{v}', v))
       for l in v.splitlines():
-        mask_lines.append(f"""echo '::add-mask::{l.strip()}'""")
+        mask_lines.append("""echo '::add-mask::{l}'""".format(l=l.strip()))
     else:
-      bash_lines.append(f"""echo '{k}={v}' >> $GITHUB_ENV""")
-      mask_lines.append(f"""echo '::add-mask::{v.strip()}'""")
-      env_lines.append(f"""{k}='{v}'""")
-      env_sh_lines.append(f"""export '{k}'='{v}'""")
+      bash_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
+      mask_lines.append("""echo '::add-mask::{v}'""".format(v=v.strip()))
+      env_lines.append("""{k}='{v}'""".format(k=k, v=v))
+      env_sh_lines.append("""export '{k}'='{v}'""".format(k=k, v=v))
     
 
   # replace re-used env vars
