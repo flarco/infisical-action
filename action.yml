@@ -46,10 +46,8 @@ runs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-
-      - name: Load
-        run: bash infisical-loader.sh
-        shell: bash
+      
+      - name: Load Secrets (Linux)
         env:
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
@@ -59,6 +57,35 @@ runs:
           INFISICAL_VERSION: ${{ inputs.version }}
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
+        if: runner.os == 'linux'
+        run: bash infisical-linux.sh
+
+      - name: Load Secrets (Mac)
+        env:
+          INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
+          INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
+          INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
+          INFISICAL_ENV: ${{ inputs.env }}
+          INFISICAL_PATH: ${{ inputs.path }}
+          INFISICAL_VERSION: ${{ inputs.version }}
+          DOTENV: ${{ inputs.dotenv }}
+          DOTENV_SH: ${{ inputs.dotenv_sh }}
+        if: runner.os == 'macOS'
+        run: bash infisical-mac.sh
+
+      - name: Load Secrets (Windows)
+        env:
+          INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
+          INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
+          INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
+          INFISICAL_ENV: ${{ inputs.env }}
+          INFISICAL_PATH: ${{ inputs.path }}
+          INFISICAL_VERSION: ${{ inputs.version }}
+          DOTENV: ${{ inputs.dotenv }}
+          DOTENV_SH: ${{ inputs.dotenv_sh }}
+        if: runner.os == 'windows'
+        shell: pwsh
+        run: .\infisical-windows.ps1
 
 branding:
   color: black
