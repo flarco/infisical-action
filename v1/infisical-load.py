@@ -47,10 +47,10 @@ for secret in secrets:
     env_lines[i] = env_lines[i].replace(key, val)
 
 print('writing secrets.sh', flush=True)
-with open('/tmp/secrets.sh', 'w') as file:
+with open('secrets.sh', 'w') as file:
   file.write('\n'.join(bash_lines))
 
-with open('/tmp/masks.sh', 'w') as file:
+with open('masks.sh', 'w') as file:
   file.write('\n'.join(mask_lines))
 
 if os.getenv('DOTENV') == 'true':
