@@ -93,7 +93,7 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'windows'
-        run: $GITHUB_ACTION_PATH\infisical-windows.ps1
+        run: ${{ github.action_path }}\infisical-windows.ps1
 
 branding:
   color: black
