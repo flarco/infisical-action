@@ -53,6 +53,7 @@ runs:
       - name: Load Secrets (Linux)
         shell: bash
         env:
+          GITHUB_ACTION_PATH: ${{ github.action_path }}
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
           INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
@@ -62,11 +63,12 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'linux'
-        run: bash ${{ github.action_path }}/infisical-linux.sh
+        run: bash $GITHUB_ACTION_PATH/infisical-linux.sh
 
       - name: Load Secrets (Mac)
         shell: bash
         env:
+          GITHUB_ACTION_PATH: ${{ github.action_path }}
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
           INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
@@ -76,11 +78,12 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'macOS'
-        run: bash ${{ github.action_path }}/infisical-mac.sh
+        run: bash $GITHUB_ACTION_PATH/infisical-mac.sh
 
       - name: Load Secrets (Windows)
         shell: pwsh
         env:
+          GITHUB_ACTION_PATH: ${{ github.action_path }}
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
           INFISICAL_CLIENT_SECRET: ${{ inputs.client_secret }}
           INFISICAL_PROJECT_ID: ${{ inputs.project_id }}
@@ -90,7 +93,7 @@ runs:
           DOTENV: ${{ inputs.dotenv }}
           DOTENV_SH: ${{ inputs.dotenv_sh }}
         if: runner.os == 'windows'
-        run: ${{ github.action_path }}\infisical-windows.ps1
+        run: $GITHUB_ACTION_PATH\infisical-windows.ps1
 
 branding:
   color: black

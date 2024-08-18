@@ -57,7 +57,7 @@ if (-not $env:INFISICAL_ENV) {
 }
 
 echo 'running infisical-load.py'
-python3 infisical.py make_secrets
+python3 $env:GITHUB_ACTION_PATH\infisical.py make_secrets
 
 echo 'loading secrets.sh'
 bash secrets.sh
