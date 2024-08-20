@@ -44,8 +44,8 @@ def make_secrets():
   EEEE123123OOOO987987FFFFF' >> "$GITHUB_ENV"
   '''
 
-  bash_lines = ['#!/usr/bin/env bash', '']
-  mask_lines = ['#!/usr/bin/bash', '']
+  bash_lines = ['#!/usr/bin/env bash', 'set -e']
+  mask_lines = ['#!/usr/bin/bash', 'set -e']
   env_lines = []
   env_sh_lines = []
 
@@ -80,20 +80,20 @@ def make_secrets():
 
   print('writing secrets.sh', flush=True)
   with open('secrets.sh', 'w') as file:
-    file.write('\n'.join(bash_lines))
+    file.write('\n'.join(bash_lines).replace('\r', ''))
 
   with open('masks.sh', 'w') as file:
-    file.write('\n'.join(mask_lines))
+    file.write('\n'.join(mask_lines).replace('\r', ''))
 
   if os.getenv('DOTENV') == 'true':
     print('writing .env', flush=True)
     with open('.env', 'w') as file:
-      file.write('\n'.join(env_lines))
+      file.write('\n'.join(env_lines).replace('\r', ''))
 
   if os.getenv('DOTENV_SH') == 'true':
     print('writing .env.sh', flush=True)
     with open('.env.sh', 'w') as file:
-      file.write('\n'.join(env_sh_lines))
+      file.write('\n'.join(env_sh_lines).replace('\r', ''))
 
 
 if __name__ == '__main__':
