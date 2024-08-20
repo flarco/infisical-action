@@ -44,8 +44,8 @@ def make_secrets():
   EEEE123123OOOO987987FFFFF' >> "$GITHUB_ENV"
   '''
 
-  bash_lines = ['#!/usr/bin/env bash', 'set -e']
-  mask_lines = ['#!/usr/bin/bash', 'set -e']
+  bash_lines = ['#!/usr/bin/env bash']
+  mask_lines = ['#!/usr/bin/bash']
   env_lines = []
   env_sh_lines = []
 
