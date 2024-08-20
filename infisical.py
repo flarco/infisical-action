@@ -81,7 +81,7 @@ def make_secrets():
       env_lines[i] = env_lines[i].replace(key, val)
 
   print('writing to $GITHUB_ENV', flush=True)
-  with open(github_env_file) as file:
+  with open(github_env_file, 'a') as file:
     file.write('\n')
     for line in env_lines:
       file.write(line + '\n')
