@@ -66,5 +66,5 @@ python3 $env:GITHUB_ACTION_PATH\infisical.py make_secrets
 echo 'loading masks.sh'
 bash masks.sh
 
-Remove-Item -Path secrets.sh
+# Remove-Item -Path secrets.sh
 Remove-Item -Path masks.sh
