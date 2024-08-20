@@ -1,5 +1,16 @@
 import os, json, pathlib, sys
 
+github_env_multiline_template = '''
+{k}<<EEEE123123OOOO987987FFFFF
+{v}
+EEEE123123OOOO987987FFFFF'
+'''
+
+secret_multiline_template = '''
+echo '{k}<<EEEE123123OOOO987987FFFFF
+{v}
+EEEE123123OOOO987987FFFFF' >> "$GITHUB_ENV"
+'''
 
 def load_from_infisical():
   # parse and load from .infisical.json
@@ -40,14 +51,9 @@ def make_secrets():
 
   github_env_file = os.environ['GITHUB_ENV']
 
-  multiline_template = '''
-  echo '{k}<<EEEE123123OOOO987987FFFFF
-  {v}
-  EEEE123123OOOO987987FFFFF' >> "$GITHUB_ENV"
-  '''
-
   secret_lines = ['#!/usr/bin/env bash']
   mask_lines = ['#!/usr/bin/bash']
+  github_env_lines = []
   env_lines = []
   env_sh_lines = []
 
@@ -59,10 +65,12 @@ def make_secrets():
 
     # so the value is masked
     if '\n' in val:
-      secret_lines.append(multiline_template.replace('{k}', k).replace('{v}', v))
+      github_env_lines.append(github_env_multiline_template.replace('{k}', k).replace('{v}', v))
+      secret_lines.append(secret_multiline_template.replace('{k}', k).replace('{v}', v))
       for l in v.splitlines():
         mask_lines.append("""echo '::add-mask::{l}'""".format(l=l.strip()))
     else:
+      github_env_lines.append("""{k}={v}""".format(k=k, v=v))
       secret_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
       mask_lines.append("""echo '::add-mask::{v}'""".format(v=v.strip()))
       env_lines.append("""{k}='{v}'""".format(k=k, v=v))
@@ -83,7 +91,7 @@ def make_secrets():
   print('writing to $GITHUB_ENV', flush=True)
   with open(github_env_file, 'a') as file:
     file.write('\n')
-    for line in env_lines:
+    for line in github_env_lines:
       file.write(line + '\n')
 
   # print('writing secrets.sh', flush=True)
