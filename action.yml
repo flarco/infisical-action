@@ -81,7 +81,7 @@ runs:
         run: bash $GITHUB_ACTION_PATH/infisical-mac.sh
 
       - name: Load Secrets (Windows)
-        shell: pwsh
+        shell: powershell
         env:
           GITHUB_ACTION_PATH: ${{ github.action_path }}
           INFISICAL_CLIENT_ID: ${{ inputs.client_id }}
