@@ -38,13 +38,15 @@ def make_secrets():
   # delete the env.json file
   os.remove('env.json')
 
+  github_env_file = os.environ['GITHUB_ENV']
+
   multiline_template = '''
   echo '{k}<<EEEE123123OOOO987987FFFFF
   {v}
   EEEE123123OOOO987987FFFFF' >> "$GITHUB_ENV"
   '''
 
-  bash_lines = ['#!/usr/bin/env bash']
+  secret_lines = ['#!/usr/bin/env bash']
   mask_lines = ['#!/usr/bin/bash']
   env_lines = []
   env_sh_lines = []
@@ -57,11 +59,11 @@ def make_secrets():
 
     # so the value is masked
     if '\n' in val:
-      bash_lines.append(multiline_template.replace('{k}', k).replace('{v}', v))
+      secret_lines.append(multiline_template.replace('{k}', k).replace('{v}', v))
       for l in v.splitlines():
         mask_lines.append("""echo '::add-mask::{l}'""".format(l=l.strip()))
     else:
-      bash_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
+      secret_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
       mask_lines.append("""echo '::add-mask::{v}'""".format(v=v.strip()))
       env_lines.append("""{k}='{v}'""".format(k=k, v=v))
       env_sh_lines.append("""export '{k}'='{v}'""".format(k=k, v=v))
@@ -73,14 +75,20 @@ def make_secrets():
     val = secret['value']
     
     key = '${' + k + '}'
-    for i, _ in enumerate(bash_lines):
-      bash_lines[i] = bash_lines[i].replace(key, val)
+    for i, _ in enumerate(secret_lines):
+      secret_lines[i] = secret_lines[i].replace(key, val)
     for i, _ in enumerate(env_lines):
       env_lines[i] = env_lines[i].replace(key, val)
 
-  print('writing secrets.sh', flush=True)
-  with open('secrets.sh', 'w') as file:
-    file.write('\n'.join(bash_lines).replace('\r', ''))
+  print('writing to $GITHUB_ENV', flush=True)
+  with open(github_env_file) as file:
+    file.write('\n')
+    for line in env_lines:
+      file.write(line + '\n')
+
+  # print('writing secrets.sh', flush=True)
+  # with open('secrets.sh', 'w') as file:
+  #   file.write('\n'.join(secret_lines).replace('\r', ''))
 
   with open('masks.sh', 'w') as file:
     file.write('\n'.join(mask_lines).replace('\r', ''))

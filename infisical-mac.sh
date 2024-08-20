@@ -42,8 +42,8 @@ fi
 echo 'running infisical-load.py'
 python3 $GITHUB_ACTION_PATH/infisical.py make_secrets
 
-echo 'loading secrets.sh'
-bash secrets.sh
+# echo 'loading secrets.sh'
+# bash secrets.sh
 
 echo 'loading masks.sh'
 bash masks.sh
