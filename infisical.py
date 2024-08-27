@@ -52,7 +52,7 @@ def make_secrets():
   github_env_file = os.environ['GITHUB_ENV']
 
   secret_lines = ['#!/usr/bin/env bash']
-  mask_lines = ['#!/usr/bin/bash']
+  mask_lines = ['']
   github_env_lines = []
   env_lines = []
   env_sh_lines = []

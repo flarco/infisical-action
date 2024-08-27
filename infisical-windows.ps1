@@ -60,11 +60,9 @@ echo 'running infisical-load.py'
 Set-Alias python3 python
 python3 $env:GITHUB_ACTION_PATH\infisical.py make_secrets
 
-# echo 'loading secrets.sh'
-# bash secrets.sh
-
-echo 'loading masks.sh'
-bash masks.sh
+echo 'loading masks'
+mv masks.sh masks.ps1
+.\masks.ps1
 
 # Remove-Item -Path secrets.sh
-Remove-Item -Path masks.sh
+Remove-Item -Path masks.ps1
