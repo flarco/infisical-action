@@ -68,7 +68,7 @@ def make_secrets():
       github_env_lines.append(github_env_multiline_template.replace('{k}', k).replace('{v}', v))
       secret_lines.append(secret_multiline_template.replace('{k}', k).replace('{v}', v))
       for l in v.splitlines():
-        mask_lines.append("""echo '::add-mask::{l}'""".format(l=l.strip()))
+        if l.strip(): mask_lines.append("""echo '::add-mask::{l}'""".format(l=l.strip()))
     else:
       github_env_lines.append("""{k}={v}""".format(k=k, v=v))
       secret_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
