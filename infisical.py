@@ -72,7 +72,7 @@ def make_secrets():
     else:
       github_env_lines.append("""{k}={v}""".format(k=k, v=v))
       secret_lines.append("""echo '{k}={v}' >> $GITHUB_ENV""".format(k=k, v=v))
-      mask_lines.append("""echo '::add-mask::{v}'""".format(v=v.strip()))
+      if v.strip(): mask_lines.append("""echo '::add-mask::{v}'""".format(v=v.strip()))
       env_lines.append("""{k}='{v}'""".format(k=k, v=v))
       env_sh_lines.append("""export '{k}'='{v}'""".format(k=k, v=v))
     
