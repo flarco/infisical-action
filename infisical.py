@@ -3,7 +3,7 @@ import os, json, pathlib, sys
 github_env_multiline_template = '''
 {k}<<EEEE123123OOOO987987FFFFF
 {v}
-EEEE123123OOOO987987FFFFF'
+EEEE123123OOOO987987FFFFF
 '''
 
 secret_multiline_template = '''
