@@ -2,7 +2,11 @@
 set -e
 
 # download jq
-wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 && mv jq-linux-amd64 jq && chmod +x jq
+if [ "$(uname -m)" = "aarch64" ]; then
+    wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-arm64 && mv jq-linux-arm64 jq && chmod +x jq
+else
+    wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 && mv jq-linux-amd64 jq && chmod +x jq
+fi
 
 if test -f ".infisical.json"; then
   # get INFISICAL_PATH is emtpy or set to /
@@ -26,7 +30,11 @@ fi
 
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
-wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_amd64.tar.gz" && tar -xf "infisical_${VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${VERSION}_linux_amd64.tar.gz"
+if [ "$(uname -m)" = "aarch64" ]; then
+    wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_arm64.tar.gz" && tar -xf "infisical_${VERSION}_linux_arm64.tar.gz" && rm -f "infisical_${VERSION}_linux_arm64.tar.gz"
+else
+    wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_linux_amd64.tar.gz" && tar -xf "infisical_${VERSION}_linux_amd64.tar.gz" && rm -f "infisical_${VERSION}_linux_amd64.tar.gz"
+fi
 
 echo 'downloaded infisical cli'
 
