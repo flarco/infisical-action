@@ -48,7 +48,7 @@ runs:
         uses: actions/setup-python@v5
         if: ${{ inputs.use_system_python != 'true' }}
         with:
-          python-version: '3.7'
+          python-version: '3.9'
       
       - name: Load Secrets (Linux)
         shell: bash
