@@ -2,7 +2,7 @@
 set -e
 
 # download jq
-if [ "$(uname -m)" = "aarch64" ]; then
+if [ "$(uname -m)" = "arm64" ]; then
     wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-macos-arm64 && mv jq-macos-arm64 jq && chmod +x jq
 else
     wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-macos-amd64 && mv jq-macos-amd64 jq && chmod +x jq
@@ -30,7 +30,7 @@ fi
 
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
-if [ "$(uname -m)" = "aarch64" ]; then
+if [ "$(uname -m)" = "arm64" ]; then
     wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_darwin_arm64.tar.gz" && tar -xf "infisical_${VERSION}_darwin_arm64.tar.gz" && rm -f "infisical_${VERSION}_darwin_arm64.tar.gz"
 else
     wget "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_darwin_amd64.tar.gz" && tar -xf "infisical_${VERSION}_darwin_amd64.tar.gz" && rm -f "infisical_${VERSION}_darwin_amd64.tar.gz"
