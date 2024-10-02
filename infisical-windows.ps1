@@ -17,8 +17,10 @@ Remove-Item -Path "infisical_$suffix"
 
 echo 'downloaded infisical cli'
 
+echo 'building infisical-prep'
 go build -o infisical-prep $env:GITHUB_ACTION_PATH\infisical-prep.go
-./infisical-prep
+echo 'running infisical-prep'
+.\infisical-prep
 
 echo 'running infisical-load.py'
 Set-Alias python3 python

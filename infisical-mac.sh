@@ -12,7 +12,9 @@ fi
 
 echo 'downloaded infisical cli'
 
+echo 'building infisical-prep'
 go build -o infisical-prep $GITHUB_ACTION_PATH/infisical-prep.go
+echo 'running infisical-prep'
 ./infisical-prep
 
 echo 'running infisical-load.py'
