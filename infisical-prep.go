@@ -57,7 +57,7 @@ func main() {
 	}
 	os.Setenv("INFISICAL_TOKEN", token)
 
-	fmt.Println("Got token")
+	fmt.Println(" >> Got token")
 
 	// Export environment variables
 	infisicalEnv := os.Getenv("INFISICAL_ENV")
@@ -67,7 +67,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Environment variables exported to env.json")
+	fmt.Println(" >> Environment variables exported to env.json")
 }
 
 func readInfisicalConfig(filename string) (InfisicalConfig, error) {
