@@ -28,5 +28,5 @@ jobs:
           path: /
 
       - name: Echo
-        run: echo $ENV
+        run: echo ENV=$ENV
         shell: bash

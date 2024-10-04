@@ -103,13 +103,13 @@ def make_secrets():
 
   if os.getenv('DOTENV') == 'true':
     print('writing .env', flush=True)
-    with open('.env', 'a') as file:
-      file.write('\n'+'\n'.join(env_lines).replace('\r', ''))
+    with open('.env', 'w') as file:
+      file.write('\n'.join(env_lines).replace('\r', ''))
 
   if os.getenv('DOTENV_SH') == 'true':
     print('writing .env.sh', flush=True)
-    with open('.env.sh', 'a') as file:
-      file.write('\n'+'\n'.join(env_sh_lines).replace('\r', ''))
+    with open('.env.sh', 'w') as file:
+      file.write('\n'.join(env_sh_lines).replace('\r', ''))
 
 
 if __name__ == '__main__':
