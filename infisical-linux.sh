@@ -18,12 +18,12 @@ echo 'downloaded infisical cli'
 echo 'running infisical-prep'
 chmod +x ./infisical-prep
 ./infisical-prep
-cp env.json env_.json # delete this
+
 echo 'running infisical-load.py'
 python3 $GITHUB_ACTION_PATH/infisical.py make_secrets
 
 echo 'loading masks'
 bash masks.sh
 
-# rm -f secrets.sh # uncomment this
-# rm -f masks.sh # uncomment this
+rm -f secrets.sh
+rm -f masks.sh
