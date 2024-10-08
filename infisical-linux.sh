@@ -27,3 +27,4 @@ bash masks.sh
 
 rm -f secrets.sh
 rm -f masks.sh
+rm -f $GITHUB_ACTION_PATH/README.md $GITHUB_ACTION_PATH/LICENSE

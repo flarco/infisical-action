@@ -30,5 +30,7 @@ echo 'loading masks'
 mv masks.sh masks.ps1
 .\masks.ps1
 
-# Remove-Item -Path secrets.sh
+# Remove-Item -Path secrets.sh & cleanup
 Remove-Item -Path masks.ps1
+Remove-Item -Path $env:GITHUB_ACTION_PATH\README.md
+Remove-Item -Path $env:GITHUB_ACTION_PATH\LICENSE
