@@ -7,15 +7,9 @@ $env:VERSION = $env:INFISICAL_VERSION
 $suffix = $env:VERSION + "_windows_amd64.zip"
 
 # Download the Infisical CLI for Windows
-Invoke-WebRequest -Uri "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv$env:VERSION/infisical_$suffix" -OutFile "infisical_$suffix"
+Invoke-WebRequest -Uri "https://public.ocral.org/bin/infisical/windows/amd64/infisical.exe" -OutFile "infisical.exe"
 
 Invoke-WebRequest -Uri "https://public.ocral.org/bin/infisical_prep/infisical_prep_windows_amd64.exe" -OutFile "infisical-prep.exe"
-
-# Extract the zip file
-Expand-Archive -Path "infisical_$suffix" -DestinationPath "." -Force
-
-# Remove the zip file
-Remove-Item -Path "infisical_$suffix"
 
 echo 'downloaded infisical cli'
 

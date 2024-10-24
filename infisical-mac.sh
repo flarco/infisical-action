@@ -5,11 +5,11 @@ set -e
 # download infisical cli
 export VERSION=$INFISICAL_VERSION
 if [ "$(uname -m)" = "arm64" ]; then
-    wget -q "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_darwin_arm64.tar.gz" && tar -xf "infisical_${VERSION}_darwin_arm64.tar.gz" && rm -f "infisical_${VERSION}_darwin_arm64.tar.gz"
+    wget -q "https://public.ocral.org/bin/infisical/darwin/arm64/infisical"
     wget -q "https://public.ocral.org/bin/infisical_prep/infisical_prep_darwin_arm64"
     mv infisical_prep_darwin_arm64 infisical-prep
 else
-    wget -q "https://github.com/Infisical/infisical/releases/download/infisical-cli%2Fv${VERSION}/infisical_${VERSION}_darwin_amd64.tar.gz" && tar -xf "infisical_${VERSION}_darwin_amd64.tar.gz" && rm -f "infisical_${VERSION}_darwin_amd64.tar.gz"
+    wget -q "https://public.ocral.org/bin/infisical/darwin/arm64/infisical"
     wget -q "https://public.ocral.org/bin/infisical_prep/infisical_prep_darwin_amd64"
     mv infisical_prep_darwin_amd64 infisical-prep
 fi
