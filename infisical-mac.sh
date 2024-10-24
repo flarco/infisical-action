@@ -17,6 +17,7 @@ fi
 echo 'downloaded infisical cli'
 
 echo 'running infisical-prep'
+chmod +x ./infisical
 chmod +x ./infisical-prep
 ./infisical-prep
 
