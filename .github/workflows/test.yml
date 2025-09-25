@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [macos-latest, ubuntu-latest, windows-latest]
+        runner: [macos-latest, macos-14, ubuntu-latest, windows-latest, windows-11-arm]
     
     steps:
       - name: Load Secrets
