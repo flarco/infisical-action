@@ -20,6 +20,9 @@ GOOS=linux GOARCH=amd64 go build -o infisical_prep_linux_amd64
 echo "Compiling windows amd64"
 GOOS=windows GOARCH=amd64 go build -o infisical_prep_windows_amd64.exe
 
+echo "Compiling windows arm64"
+GOOS=windows GOARCH=arm64 go build -o infisical_prep_windows_arm64.exe
+
 # upload to R2
 
 echo "Uploading to R2"
@@ -34,6 +37,7 @@ mc cp infisical_prep_darwin_amd64 R2/public/bin/infisical_prep/
 mc cp infisical_prep_linux_arm64 R2/public/bin/infisical_prep/
 mc cp infisical_prep_linux_amd64 R2/public/bin/infisical_prep/
 mc cp infisical_prep_windows_amd64.exe R2/public/bin/infisical_prep/
+mc cp infisical_prep_windows_arm64.exe R2/public/bin/infisical_prep/
 
 echo "Cleaning up"
-rm -f infisical_prep_darwin_arm64 infisical_prep_darwin_amd64 infisical_prep_linux_arm64 infisical_prep_linux_amd64 infisical_prep_windows_amd64.exe
+rm -f infisical_prep_darwin_arm64 infisical_prep_darwin_amd64 infisical_prep_linux_arm64 infisical_prep_linux_amd64 infisical_prep_windows_amd64.exe infisical_prep_windows_arm64.exe
